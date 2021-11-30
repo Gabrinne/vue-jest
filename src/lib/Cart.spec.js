@@ -20,7 +20,7 @@ describe("Cart", () => {
 
   describe("getTotal()", () => {
     it("Deve retornar 0 quando getTotal() é executado em uma instância recém criada ", () => {
-      expect(cart.getTotal()).toEqual(0);
+      expect(cart.getTotal().getAmount()).toEqual(0);
     });
 
     it("deve multiplicar quantidade e preço e retornar a quantia total ", () => {
@@ -29,7 +29,7 @@ describe("Cart", () => {
         quantity: 2,
       });
 
-      expect(cart.getTotal()).toEqual(70776);
+      expect(cart.getTotal().getAmount()).toEqual(70776);
     });
 
     it("Deve garantir que não exista mais de um produto por vez", () => {
@@ -43,7 +43,7 @@ describe("Cart", () => {
         quantity: 1,
       });
 
-      expect(cart.getTotal()).toEqual(35388);
+      expect(cart.getTotal().getAmount()).toEqual(35388);
     });
 
     it("Deve atualizar o valor total quando o produto é removido ", () => {
@@ -59,7 +59,7 @@ describe("Cart", () => {
 
       cart.remove(product);
 
-      expect(cart.getTotal()).toEqual(41872);
+      expect(cart.getTotal().getAmount()).toEqual(41872);
 
       //112.648
     });
@@ -92,7 +92,7 @@ describe("Cart", () => {
       });
 
       expect(cart.sumary()).toMatchSnapshot();
-      expect(cart.getTotal()).toBeGreaterThan(0);
+      expect(cart.getTotal().getAmount()).toBeGreaterThan(0);
     });
 
     it("deve limpar o carrinho quando checkout() for chamado", () => {
@@ -103,7 +103,7 @@ describe("Cart", () => {
 
       cart.checkout();
 
-      expect(cart.getTotal()).toEqual(0);
+      expect(cart.getTotal().getAmount()).toEqual(0);
     });
   });
 });

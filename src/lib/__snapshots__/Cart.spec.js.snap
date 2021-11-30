@@ -43,25 +43,3 @@ Object {
   "total": 302556,
 }
 `;
-
-exports[`Cart checkout() deve retornar um objeto com o total e a lista de itens quando summary() for chamado 1`] = `
-Object {
-  "items": Array [
-    Object {
-      "product": Object {
-        "price": 35388,
-        "title": "Adidas",
-      },
-      "quantity": 5,
-    },
-    Object {
-      "product": Object {
-        "price": 41872,
-        "title": "Nike",
-      },
-      "quantity": 3,
-    },
-  ],
-  "total": 302556,
-}
-`;
