@@ -1,10 +1,22 @@
-module.exports.queryString = (obj) =>
-  Object.entries(obj)
-    .map(([key, value]) => {
-      if (typeof value === "object" && !Array.isArray(value)) {
-        throw new Error("Por favor, cheque os parametros");
-      }
+export const keyValueToString = ([key, value]) => {
+  if (typeof value === "object" && !Array.isArray(value)) {
+    throw new Error("Por favor, cheque os parametros");
+  }
+  return `${key}=${value}`;
+};
 
-      return `${key}=${value}`;
+export function queryString(obj) {
+  return Object.entries(obj).map(keyValueToString).join("&");
+}
+
+export function parse(string) {
+  return Object.fromEntries(
+    string.split("&").map((item) => {
+      const parts = item.split("=");
+      if (parts[1].indexOf(",") > -1) {
+        parts[1] = parts[1].split(",");
+      }
+      return parts;
     })
-    .join("&");
+  );
+}

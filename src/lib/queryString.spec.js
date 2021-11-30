@@ -1,4 +1,4 @@
-const { queryString } = require("./queryString");
+import { queryString, parse } from "./queryString";
 
 describe("objeto para a query string", () => {
   it("deve criar uma query string valida quando um objeto é fornecido", () => {
@@ -31,5 +31,22 @@ describe("objeto para a query string", () => {
     expect(() => {
       queryString(obj);
     }).toThrowError();
+  });
+});
+describe("query string para objeto", () => {
+  it("deve converter uma query string para objeto", () => {
+    const qs = "name=Gabrinne";
+
+    expect(parse(qs)).toEqual({
+      name: "Gabrinne",
+    });
+  });
+  it("deve converter uma query string  para objeto separado por vírgulas ", () => {
+    const qs = "name=Gabrinne&abilities=js,tdd";
+
+    expect(parse(qs)).toEqual({
+      name: "Gabrinne",
+      abilities: ["js", "tdd"],
+    });
   });
 });
